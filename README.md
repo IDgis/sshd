@@ -23,13 +23,14 @@ It is now possible to access the remote database by connecting to localhost:5555
 
 ## Example 2:
 It is also possible to attach to a docker network. Let's assume that the container from the previous example is attached to a 
-network named 'my_network'.
+network named 'my_network' (list networks with 'docker network ls').
 
 - docker run -e PASSWORD=secret -P --name my_sshd **--net my_network** -d idgis/sshd
 - docker port my_sshd (example output: 22/tcp -> 0.0.0.0:32773)
 
 from client:
 
-- ssh -L 5555:my_db:5432 root@host:32773
+- ssh -L 5555:my_db:5432 root@host:32773 (where my_db is the name of the db container)
 
 It is now again possible to access the remote database by connecting to localhost:5555.
+N.B. Make sure port 32773 is open in the firewall.
